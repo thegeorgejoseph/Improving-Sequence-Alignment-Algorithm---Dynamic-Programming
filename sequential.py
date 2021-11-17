@@ -158,7 +158,7 @@ if __name__  == '__main__':
             file.write("\n")
             file.write(res1[len(res1)-50:])
             file.write("\n")
-            file.write(res2[len(res2)-59:])
+            file.write(res2[len(res2)-50:])
         else:
             file.write(res1)
             file.write("\n")
