@@ -1,6 +1,8 @@
 import time 
+from memory_profiler import memory_usage
 
 def dynamicSequentialAlignment(string1,string2):
+    start_time = time.time()
     mapping = {"A":0,"C":1,"G":2,"T":3}
     penalty = [
         [0,110,48,94],
@@ -104,9 +106,10 @@ def dynamicSequentialAlignment(string1,string2):
     
     
     print(f"Minimum Penalty is {dp[-1][-1]}")
-    print(" ".join(string1result[startIdx:]))
-    print(" ".join(string2result[startIdx:]))
-    print("Done")   
+    print("Done") 
+    total_time = time.time() - start_time  
+    
+    return " ".join(string1result[startIdx:])," ".join(string2result[startIdx:]),total_time
 
 def stringGenerator():
     results = []
@@ -141,4 +144,26 @@ if __name__  == '__main__':
     string1, string2 = stringGenerator()
     print(f'The First Generated String is ${string1} and the Second Generated String is ${string2}')
     print(f"Validating Generated String and Input Strings : {unitTest(string1,string2)}")
-    dynamicSequentialAlignment(string1,string2)
+    res1,res2, timer = dynamicSequentialAlignment(string1,string2)
+    
+    with open("output.txt","w") as file:
+        if len(res1) > 100:
+            file.write("First 50 characters")
+            file.write("\n")
+            file.write(res1[:51])
+            file.write("\n")
+            file.write(res2[:51])
+            file.write("\n")
+            file.write("Last 50 characters")
+            file.write("\n")
+            file.write(res1[len(res1)-50:])
+            file.write("\n")
+            file.write(res2[len(res2)-59:])
+        else:
+            file.write(res1)
+            file.write("\n")
+            file.write(res2)
+            
+        file.write("\n")
+        file.write(f"Time taken: {timer}")
+    
