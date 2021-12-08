@@ -1,0 +1,1 @@
+python3 A_G_S_efficient.py input.txt

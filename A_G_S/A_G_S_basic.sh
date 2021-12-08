@@ -1,0 +1,1 @@
+python3 A_G_S_basic.py input.txt
