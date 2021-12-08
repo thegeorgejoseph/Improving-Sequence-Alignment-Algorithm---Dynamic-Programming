@@ -1,3 +1,25 @@
 CSCI 570 : Final Project
 ========================
 
+Contributers:
+-------------
+
+Name: Amal Jose
+USC ID:
+Contribution: Plotting graphs of CPU Time and Memory Usage, Preparing Documentation
+
+Name: George Joseph
+USC ID:
+Contribution: Coding and testing Basic version of the algorithm, String generator, Preparing Documentation
+
+Name: Srinivasan KS
+USC ID: 8234178058
+Contribution: Coding and testing Efficient version of the algorithm, Preparing Documentation
+
+Analysis of results:
+--------------------
+
+
+
+Insights and Observations:
+--------------------------
