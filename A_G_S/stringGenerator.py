@@ -1,8 +1,12 @@
+import sys
 
 def stringGenerator():
+    input_filename="input.txt"
+    if len(sys.argv) >1:
+        input_filename=sys.argv[1]
     results = []
     flag = False
-    with open("input.txt") as file:
+    with open(input_filename) as file:
         for line in file:
             line = line.strip('\n')
             if line.isdigit() is False:
