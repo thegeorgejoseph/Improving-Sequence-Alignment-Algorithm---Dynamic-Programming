@@ -1,10 +1,16 @@
-# algo-final-project
+# CSCI 570 Fall '21 : Final Project
 
-CSCI-570 Final Project
+Contributers: Amal, George, Srini
+Task: Sequence Alignment problem
 
-# tasks left to do
+# Tasks left to do
 
-- verify the input strings size based on the equations
-- add mem_profiler to calculate mem usage
-- add function to perform memory efficient version using D&C
-- generate time/ mem vs input size plots
+@Srini:
+- Complete Efficient algorithm and test it out (sample test cases in https://piazza.com/class/ksmlgkord5752e?cid=2701)
+
+@Amal:
+- Run plotter.py after Srini's code is ready
+- Improve .sh files to accomodate custom input files
+
+@Team:
+- Finalise on the documentation
