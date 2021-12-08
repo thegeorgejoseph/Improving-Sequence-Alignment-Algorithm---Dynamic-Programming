@@ -125,7 +125,7 @@ if __name__  == '__main__':
     # print(string2+f" ({str(len(string2))})")
     
     # print(f"\nValidating Generated String and Input Strings : {unitTest(string1,string2)}")
-    res1,res2, cost,time,memory = dynamicSequentialAlignment(string1,string2)
+    res1,res2, cost,time,memory = dynamicSequentialAlignmentBasic(string1,string2)
 
 
 

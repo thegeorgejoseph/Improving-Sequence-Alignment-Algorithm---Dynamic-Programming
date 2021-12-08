@@ -14,16 +14,12 @@ def write_output(res1,res2,cost,time,memory):
      
     with open("output.txt","w") as file:
         if len(res1) > 100:
-            file.write("First 50 characters")
-            file.write("\n")
             file.write(res1[:51])
-            file.write("\n")
-            file.write(res2[:51])
-            file.write("\n")
-            file.write("Last 50 characters")
-            file.write("\n")
+            file.write(" ")
             file.write(res1[len(res1)-50:])
             file.write("\n")
+            file.write(res2[:51])
+            file.write(" ")
             file.write(res2[len(res2)-50:])
         else:
             file.write(res1)

@@ -11,8 +11,8 @@ from A_G_S_basic import dynamicSequentialAlignmentBasic
 from A_G_S_efficient import dynamicSequentialAlignmentEfficient
 import random
 
-PLOT_X_LIMIT=1000
-NUM_POINTS=10
+PLOT_X_LIMIT=10000
+NUM_POINTS=20
 
 char_set = ["A","T","G","C"]
 
