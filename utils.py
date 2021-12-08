@@ -8,7 +8,7 @@ def get_time_point():
 
 def get_memory_point():
     process = psutil.Process(os.getpid())
-    return process.memory_info().rss/1024
+    return float(process.memory_info().rss)/1024
 
 def write_output(res1,res2,cost,time,memory):
      
@@ -32,4 +32,4 @@ def write_output(res1,res2,cost,time,memory):
             
         file.write("\n"+str(cost))
         file.write(f"\n{float(time)}")
-        file.write(f"\n{float(memory)}")
+        file.write(f"\n{memory}")

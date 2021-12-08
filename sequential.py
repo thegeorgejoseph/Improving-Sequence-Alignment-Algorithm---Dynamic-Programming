@@ -12,6 +12,10 @@ def dynamicSequentialAlignment(string1,string2):
     delta = 30
     #how to calculate penalty of alpha(A,C) = index0 = mapping["A"], index1 = mapping["C"] => penalty[index0][index1]
     
+
+    start_time = get_time_point()
+    start_memory = get_memory_point()
+
     m,n = len(string1),len(string2)
     dp = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
 
@@ -102,8 +106,9 @@ def dynamicSequentialAlignment(string1,string2):
         if string2result[i] == '_' and string1result[i] == '_':
             startIdx = i + 1
             break 
-    
-    return "".join(string1result[startIdx:]),"".join(string2result[startIdx:]),dp[-1][-1]
+    end_time = get_time_point()
+    end_memory = get_memory_point()
+    return "".join(string1result[startIdx:]),"".join(string2result[startIdx:]),dp[-1][-1],end_time-start_time,end_memory-start_memory
 
             
 
@@ -115,25 +120,21 @@ def dynamicSequentialAlignment(string1,string2):
 if __name__  == '__main__':
     string1, string2 = stringGenerator()
 
-    start_time = get_time_point()
-    start_memory = get_memory_point()
-
     print("Generated Strings:")
     print(string1+f" ({str(len(string1))})")
     print(string2+f" ({str(len(string2))})")
     
     # print(f"\nValidating Generated String and Input Strings : {unitTest(string1,string2)}")
-    res1,res2, cost = dynamicSequentialAlignment(string1,string2)
+    res1,res2, cost,time,memory = dynamicSequentialAlignment(string1,string2)
 
-    end_time = get_time_point()
-    end_memory = get_memory_point()
+
 
 
     print("\nResults:")
     print(res1)
     print(res2)
     print("\nCost: "+str(cost))
-    print("Time Taken: "+str(float(end_time-start_time)))
-    print("Memory Used(KB): "+str(float(end_memory-start_memory)))
-    write_output(res1,res2,cost,end_time-start_time,end_memory-start_memory)
+    print("Time Taken: "+str(time))
+    print("Memory Used(KB): "+str(memory))
+    write_output(res1,res2,cost,time,memory)
     
