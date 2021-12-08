@@ -10,7 +10,6 @@ Task: Sequence Alignment problem
 
 @Amal:
 - Run plotter.py after Srini's code is ready
-- Improve .sh files to accomodate custom input files
 
 @Team:
 - Finalise on the documentation
