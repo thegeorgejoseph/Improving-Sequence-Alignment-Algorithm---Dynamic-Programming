@@ -7,8 +7,8 @@ Purpose: Generate input and plot time and memory stats for the algorithm
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from sequential import dynamicSequentialAlignment
-from utils import get_memory_point, get_time_point
+from A_G_S_basic import dynamicSequentialAlignmentBasic
+from A_G_S_efficient import dynamicSequentialAlignmentEfficient
 import random
 
 PLOT_X_LIMIT=1000
@@ -44,19 +44,14 @@ if __name__  == '__main__':
             string1,string2=augment_strings(string1,string2)
 
     for (string1,string2) in inputs:
-
-        r1,r2,c,time,memory=dynamicSequentialAlignment(string1,string2)
-
+        r1,r2,c,time,memory=dynamicSequentialAlignmentBasic(string1,string2)
         inefficient_time.append(time)
         inefficient_memory.append(memory)
 
-
-        r1,r2,c,time,memory=dynamicSequentialAlignment(string1,string2)  
-
+    for (string1,string2) in inputs:
+        r1,r2,c,time,memory=dynamicSequentialAlignmentEfficient(string1,string2)  
         efficient_time.append(time)
         efficient_memory.append(memory)
-
-        print(memory)
       
 
     x=np.linspace(0, PLOT_X_LIMIT,NUM_POINTS)
@@ -65,17 +60,15 @@ if __name__  == '__main__':
     efficient_time_values=np.array(efficient_time)
     efficient_memory_values=np.array(efficient_memory)
 
-    fig, ax = plt.subplots(2,1)
-    plt.subplots_adjust(hspace=0.5)
+    plt.plot(x, inefficient_time_values, linewidth=2.0,label="Inefficient Algorithm",color="r")
+    plt.plot(x, efficient_time_values, linewidth=2.0,label="Efficient Algorithm",color="g")
+    plt.title("CPU Time(s) vs Problem Size")
+    plt.legend()
+    plt.savefig("CPUPlot.png")
 
-    ax[0].plot(x, inefficient_time_values, linewidth=2.0,label="Inefficient Algorithm",color="r")
-    ax[0].plot(x, efficient_time_values, linewidth=2.0,label="Efficient Algorithm",color="g")
-    ax[0].set_title("CPU Time(s) vs Problem Size")
-    ax[0].legend()
 
-    ax[1].plot(x, inefficient_memory_values, linewidth=2.0,label="Inefficient Algorithm",color="r")
-    ax[1].plot(x, efficient_memory_values, linewidth=2.0,label="Efficient Algorithm",color="g")
-    ax[1].set_title("Memory Usage(KB) vs Problem Size")
-    ax[1].legend()
+    plt.plot(x, inefficient_memory_values, linewidth=2.0,label="Inefficient Algorithm",color="r")
+    plt.plot(x, efficient_memory_values, linewidth=2.0,label="Efficient Algorithm",color="g")
+    plt.title("Memory Usage(KB) vs Problem Size")
 
-    plt.savefig("plot.png")
+    plt.savefig("MemoryPlot.png")

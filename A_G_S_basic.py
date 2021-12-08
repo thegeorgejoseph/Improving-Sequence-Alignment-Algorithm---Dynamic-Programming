@@ -1,7 +1,7 @@
 from stringGenerator import stringGenerator
 from utils import get_memory_point, get_time_point, write_output
 
-def dynamicSequentialAlignment(string1,string2):
+def dynamicSequentialAlignmentBasic(string1,string2):
     mapping = {"A":0,"C":1,"G":2,"T":3}
     penalty = [
         [0,110,48,94],
@@ -120,9 +120,9 @@ def dynamicSequentialAlignment(string1,string2):
 if __name__  == '__main__':
     string1, string2 = stringGenerator()
 
-    print("Generated Strings:")
-    print(string1+f" ({str(len(string1))})")
-    print(string2+f" ({str(len(string2))})")
+    # print("Generated Strings:")
+    # print(string1+f" ({str(len(string1))})")
+    # print(string2+f" ({str(len(string2))})")
     
     # print(f"\nValidating Generated String and Input Strings : {unitTest(string1,string2)}")
     res1,res2, cost,time,memory = dynamicSequentialAlignment(string1,string2)
@@ -130,11 +130,11 @@ if __name__  == '__main__':
 
 
 
-    print("\nResults:")
-    print(res1)
-    print(res2)
-    print("\nCost: "+str(cost))
-    print("Time Taken: "+str(time))
-    print("Memory Used(KB): "+str(memory))
+    # print("\nResults:")
+    # print(res1)
+    # print(res2)
+    # print("\nCost: "+str(cost))
+    # print("Time Taken: "+str(time))
+    # print("Memory Used(KB): "+str(memory))
     write_output(res1,res2,cost,time,memory)
     
