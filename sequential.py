@@ -1,8 +1,7 @@
-import time 
-from memory_profiler import memory_usage
+from stringGenerator import stringGenerator
+from utils import get_memory_point, get_time_point, write_output
 
 def dynamicSequentialAlignment(string1,string2):
-    start_time = time.time()
     mapping = {"A":0,"C":1,"G":2,"T":3}
     penalty = [
         [0,110,48,94],
@@ -104,66 +103,37 @@ def dynamicSequentialAlignment(string1,string2):
             startIdx = i + 1
             break 
     
-    
-    print(f"Minimum Penalty is {dp[-1][-1]}")
-    print("Done") 
-    total_time = time.time() - start_time  
-    
-    return " ".join(string1result[startIdx:])," ".join(string2result[startIdx:]),total_time
+    return "".join(string1result[startIdx:]),"".join(string2result[startIdx:]),dp[-1][-1]
 
-def stringGenerator():
-    results = []
-    flag = False
-    with open("input.txt") as file:
-        for line in file:
-            line = line.strip('\n')
-            if line.isdigit() is False:
-                if flag is True:
-                    results.append(string)
-                string = line
-                flag = False
-            else:
-                flag = True
-                result = string[:int(line)+1] + string + string[int(line)+1:]
-                string = result
-                # print(string)
-                
-        if flag is True:
-            results.append(string)
-            
-    file.close()
-    return results[0],results[1]
             
 
-def unitTest(string1,string2):
-    input1 = "ACACTGACTACTGACTGGTGACTACTGACTGG" #this is a test string based on prompt
-    input2 =  "TATTATACGCTATTATACGCGACGCGGACGCG" #this is another test string based on prompt
-    return input1 == string1 and input2 == string2
+# def unitTest(string1,string2):
+#     input1 = "ACACTGACTACTGACTGGTGACTACTGACTGG" #this is a test string based on prompt
+#     input2 =  "TATTATACGCTATTATACGCGACGCGGACGCG" #this is another test string based on prompt
+#     return input1 == string1 and input2 == string2
 
 if __name__  == '__main__':
     string1, string2 = stringGenerator()
-    print(f'The First Generated String is ${string1} and the Second Generated String is ${string2}')
-    print(f"Validating Generated String and Input Strings : {unitTest(string1,string2)}")
-    res1,res2, timer = dynamicSequentialAlignment(string1,string2)
+
+    start_time = get_time_point()
+    start_memory = get_memory_point()
+
+    print("Generated Strings:")
+    print(string1+f" ({str(len(string1))})")
+    print(string2+f" ({str(len(string2))})")
     
-    with open("output.txt","w") as file:
-        if len(res1) > 100:
-            file.write("First 50 characters")
-            file.write("\n")
-            file.write(res1[:51])
-            file.write("\n")
-            file.write(res2[:51])
-            file.write("\n")
-            file.write("Last 50 characters")
-            file.write("\n")
-            file.write(res1[len(res1)-50:])
-            file.write("\n")
-            file.write(res2[len(res2)-50:])
-        else:
-            file.write(res1)
-            file.write("\n")
-            file.write(res2)
-            
-        file.write("\n")
-        file.write(f"Time taken: {timer}")
+    # print(f"\nValidating Generated String and Input Strings : {unitTest(string1,string2)}")
+    res1,res2, cost = dynamicSequentialAlignment(string1,string2)
+
+    end_time = get_time_point()
+    end_memory = get_memory_point()
+
+
+    print("\nResults:")
+    print(res1)
+    print(res2)
+    print("\nCost: "+str(cost))
+    print("Time Taken: "+str(float(end_time-start_time)))
+    print("Memory Used(KB): "+str(float(end_memory-start_memory)))
+    write_output(res1,res2,cost,end_time-start_time,end_memory-start_memory)
     
