@@ -9,7 +9,7 @@ USC ID:
 Contribution: Plotting graphs of CPU Time and Memory Usage, Preparing Documentation
 
 Name: George Joseph
-USC ID:
+USC ID: 8486068836
 Contribution: Coding and testing Basic version of the algorithm, String generator, Preparing Documentation
 
 Name: Srinivasan KS
