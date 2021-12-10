@@ -1,14 +1,26 @@
 import time 
 import os
 import psutil
-
+import tracemalloc
+tracemalloc.start()
 
 def get_time_point():
     return time.time()
 
+def get_time_diff(start,end):
+    return end-start
+
 def get_memory_point():
+    return tracemalloc.get_traced_memory()[0]/1024
     process = psutil.Process(os.getpid())
     return float(process.memory_info().rss)/1024
+
+def get_memory_diff(start,end):
+    # top_stats = end.compare_to(start, 'lineno')
+    # for stat in top_stats[:10]:
+    #     print(stat)
+    # return end.compare_to(start, 'lineno')
+    return end-start
 
 def write_output(res1,res2,cost,time,memory):
      

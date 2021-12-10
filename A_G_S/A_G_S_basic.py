@@ -1,5 +1,5 @@
 from stringGenerator import stringGenerator
-from utils import get_memory_point, get_time_point, write_output
+from utils import get_memory_diff, get_memory_point, get_time_diff, get_time_point, write_output
 
 def dynamicSequentialAlignmentBasic(string1,string2):
     mapping = {"A":0,"C":1,"G":2,"T":3}
@@ -108,7 +108,7 @@ def dynamicSequentialAlignmentBasic(string1,string2):
             break 
     end_time = get_time_point()
     end_memory = get_memory_point()
-    return "".join(string1result[startIdx:]),"".join(string2result[startIdx:]),dp[-1][-1],end_time-start_time,end_memory-start_memory
+    return "".join(string1result[startIdx:]),"".join(string2result[startIdx:]),dp[-1][-1],get_time_diff(start_time,end_time),get_memory_diff(start_memory,end_memory)
 
             
 
@@ -119,7 +119,7 @@ def dynamicSequentialAlignmentBasic(string1,string2):
 
 if __name__  == '__main__':
     string1, string2 = stringGenerator()
-
+    
     # print("Generated Strings:")
     # print(string1+f" ({str(len(string1))})")
     # print(string2+f" ({str(len(string2))})")
