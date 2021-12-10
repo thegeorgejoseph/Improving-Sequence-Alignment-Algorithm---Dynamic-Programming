@@ -30,15 +30,20 @@ def stringGenerator():
         if flag is True:
             results.append(string)
             idxCounts.append(idxCount)
-            
+                
     file.close()
-    if len(results[0]) > 2 ** idxCounts[0] * len(initialStrings[0]):
+    if idxCount !=0  and len(results[0]) > 2 ** idxCounts[0] * len(initialStrings[0]):
         results[0] = results[0][:(2**idxCounts[0]*len(initialStrings[0]))]
         validate = True
-    if len(results[1]) > 2 ** idxCounts[1] * len(initialStrings[1]):
+    if idxCount !=0 and len(results[1]) > 2 ** idxCounts[1] * len(initialStrings[1]):
         results[1] = results[1][:(2**idxCounts[1]*len(initialStrings[1]))]
         validate = True
     if validate: print("The strings have been validated to meet the size constraint")
+    if len(results) == 0: 
+        with open(input_filename) as file:
+            for line in file:
+                line  = line.strip('\n')
+                results.append(line)
     return results[0],results[1]
 
 
