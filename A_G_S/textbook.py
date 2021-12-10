@@ -1,5 +1,7 @@
+from types import DynamicClassAttribute
 from stringGenerator import stringGenerator
-from utils import get_memory_point, get_time_point, write_output
+from utils import get_memory_diff, get_memory_point, get_time_diff, get_time_point, write_output
+from A_G_S_basic import dynamicSequentialAlignmentBasic
 
 mapping = {"A":0,"C":1,"G":2,"T":3}
 penalty = [
@@ -21,11 +23,40 @@ def SpaceEfficientAlignment(string1,string2):
     for j in range(1,n+1):
         B[0][1]=j*delta
         for i in range(1,m):
-            B[i][1]=min(penalty[mapping[string1[i-1]]][mapping[string2[j-1]]]+B[i-1][0],min(delta+B[i-1][1],delta+B[i][0]))
+            print("For ",i,j,"Comparing ",penalty[mapping[string1[i-1]]][mapping[string2[j-1]]]+B[i-1][0],delta+B[i-1][1],delta+B[i][0])
+            index1,index2 = mapping[string1[i-1]],mapping[string2[j-1]]
+            currentPen = penalty[index1][index2]
+            B[i][1]=min(currentPen+B[i-1][0],min(delta+B[i-1][1],delta+B[i][0]))
     
-    for i in range(0,m+1):
-        B[i][0]=B[i][1]
-    
+        for i in range(0,m+1):
+            B[i][0]=B[i][1]
+            B[i][1]=0
+
+    return [B[i][0] for i in range(0,m+1)]
+
+def DivideAndConquerAlignment(string1,string2):
+    m,n = len(string1),len(string2)
+
+    if m < 2 or n < 2:
+            res1,res2,min_cost,a,b = dynamicSequentialAlignmentBasic(string1,string2)
+            return res1,res2,min_cost
+
+    left_costs = SpaceEfficientAlignment(string1, string2[:n//2])
+    right_costs = SpaceEfficientAlignment(string1[::-1], string2[n//2:][::-1])
+    q=0
+    sum=left_costs[0] + right_costs[m]
+    for i in range(1,m+1):
+        if(i == 0):
+            sum = left_costs[i] + right_costs[m-i]
+        if(sum > (left_costs[i] + right_costs[m-i])):
+            sum = left_costs[i] + right_costs[m-i]
+            q = i
+
+    print(sum)
+    left = DivideAndConquerAlignment(string1[:q], string2[:n//2])
+    right = DivideAndConquerAlignment(string1[q:], string2[n//2:])
+	
+    return left[0]+right[0],left[1]+right[1],left[2]+right[2]
 
 # @Srini, you'll need to edit this function to work with the efficient algorithm
 def dynamicSequentialAlignmentEfficient(string1,string2):
@@ -36,24 +67,8 @@ def dynamicSequentialAlignmentEfficient(string1,string2):
     start_time = get_time_point()
     start_memory = get_memory_point()
 
-    B=[]
-    m,n = len(string1),len(string2)
-    for i in range(0,m+1):
-        B.append([0,0])
-    for i in range(0,m+1):
-        B[i][0]=i*delta
-
-    for j in range(1,n+1):
-        B[0][1]=j*delta
-        for i in range(1,m):
-            B[i][1]=min(penalty[mapping[string1[i-1]]][mapping[string2[j-1]]]+B[i-1][0],min(delta+B[i-1][1],delta+B[i][0]))
-    
-    for i in range(0,m+1):
-        B[i][0]=B[i][1]
-    
-
-
-
+  
+    print(DivideAndConquerAlignment(string1,string2))
 
 
   
