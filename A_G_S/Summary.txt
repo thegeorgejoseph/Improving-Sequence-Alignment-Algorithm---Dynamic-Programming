@@ -5,7 +5,7 @@ Contributers:
 -------------
 
 Name: Amal Jose
-USC ID:
+USC ID: 6493967427
 Contribution: Plotting graphs of CPU Time and Memory Usage, Preparing Documentation
 
 Name: George Joseph

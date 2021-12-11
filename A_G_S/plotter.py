@@ -11,7 +11,7 @@ from A_G_S_basic import dynamicSequentialAlignmentBasic
 from A_G_S_efficient import dynamicSequentialAlignmentEfficient
 import random
 
-PLOT_X_LIMIT=10000
+PLOT_X_LIMIT=1000
 NUM_POINTS=20
 
 char_set = ["A","T","G","C"]
@@ -44,12 +44,16 @@ if __name__  == '__main__':
             string1,string2=augment_strings(string1,string2)
 
     for (string1,string2) in inputs:
+        print("Running Basic Algo for "+str((len(string1)+len(string2))))
         r1,r2,c,time,memory=dynamicSequentialAlignmentBasic(string1,string2)
+        print("Time:",time,"| Memory:",memory)
         inefficient_time.append(time)
         inefficient_memory.append(memory)
 
     for (string1,string2) in inputs:
+        print("Running Efficient Algo for "+str((len(string1)+len(string2))))
         r1,r2,c,time,memory=dynamicSequentialAlignmentEfficient(string1,string2)  
+        print("Time:",time,"| Memory:",memory)
         efficient_time.append(time)
         efficient_memory.append(memory)
       
