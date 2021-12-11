@@ -4,4 +4,4 @@ else
     filename=$1
 fi
 
-python3 A_G_S_basic.py $filename
+python3 6493967427_8486068836_8234178058_basic.py $filename
